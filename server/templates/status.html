@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Track Pothole Report</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+  <div class="container">
+    <h2>Track Report Status</h2>
+    <form id="trackForm">
+      <input type="number" id="reportId" class="form-control my-2" placeholder="Enter Report ID" required>
+      <button type="submit" class="btn btn-primary">Track</button>
+    </form>
+    <div class="mt-4" id="statusResult"></div>
+  </div>
+
+  <script>
+    document.getElementById("trackForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const reportId = document.getElementById("reportId").value;
+      const res = await fetch(`/status/${reportId}`);
+      const data = await res.json();
+
+      if (data.error) {
+        document.getElementById("statusResult").innerHTML = `<p class="text-danger">${data.error}</p>`;
+      } else {
+        document.getElementById("statusResult").innerHTML = `
+          <div class="card p-3">
+            <p><strong>Status:</strong> ${data.status}</p>
+            <p><strong>Severity:</strong> ${data.severity_label}</p>
+            <p><strong>Reported on:</strong> ${data.timestamp}</p>
+            <p><strong>Location:</strong> (${data.latitude}, ${data.longitude})</p>
+            <p><strong>Votes:</strong> ${data.upvotes || 0}</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

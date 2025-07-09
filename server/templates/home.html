@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pothole Reporter Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+
+  <div class="max-w-5xl mx-auto py-10 px-4">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-10" data-aos="fade-down">
+      🚧 Pothole Reporter Dashboard
+    </h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
+      
+      <a href="/report-form" class="bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-lg py-6 px-4 text-center text-lg transition transform hover:scale-105 duration-300">
+        📸 Report a Pothole
+      </a>
+      
+      <a href="/status" class="bg-blue-500 hover:bg-blue-600 text-white rounded-xl shadow-lg py-6 px-4 text-center text-lg transition transform hover:scale-105 duration-300">
+        📍 Check Report Status
+      </a>
+      
+      <a href="/reports" class="bg-green-500 hover:bg-green-600 text-white rounded-xl shadow-lg py-6 px-4 text-center text-lg transition transform hover:scale-105 duration-300">
+        🌍 View All Reports (JSON)
+      </a>
+
+      {% if logged_in %}
+        <a href="/my-reports" class="bg-yellow-400 hover:bg-yellow-500 text-white rounded-xl shadow-lg py-6 px-4 text-center text-lg transition transform hover:scale-105 duration-300">
+          📑 My Reports
+        </a>
+        
+        <form action="/logout" method="POST" class="rounded-xl shadow-lg">
+          <button type="submit" class="w-full bg-gray-700 hover:bg-gray-800 text-white py-6 px-4 text-lg rounded-xl transition transform hover:scale-105 duration-300">
+            🚪 Logout
+          </button>
+        </form>
+      {% else %}
+        <a href="/login-form" class="bg-gray-800 hover:bg-gray-900 text-white rounded-xl shadow-lg py-6 px-4 text-center text-lg transition transform hover:scale-105 duration-300">
+          🔐 Login
+        </a>
+
+        <a href="/register-form" class="bg-gray-500 hover:bg-gray-600 text-white rounded-xl shadow-lg py-6 px-4 text-center text-lg transition transform hover:scale-105 duration-300">
+          📝 Register
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="text-center mt-10 text-sm text-gray-500" data-aos="fade-in" data-aos-delay="300">
+      Built with 💻 by Team HackOrbit
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
