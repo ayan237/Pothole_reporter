@@ -42,3 +42,23 @@ def verify_user(username, password):
     if user and check_password_hash(user[2], password):
         return user
     return None
+
+def init_reports_table():
+    conn = sqlite3.connect('users.db')
+    c = conn.cursor()
+    c.execute('''
+    CREATE TABLE IF NOT EXISTS reports (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        latitude REAL NOT NULL,
+        longitude REAL NOT NULL,
+        severity_label TEXT,
+        confidence REAL,
+        timestamp TEXT,
+        image_filename TEXT NOT NULL
+    )
+''')
+
+
+    conn.commit()
+    conn.close()
